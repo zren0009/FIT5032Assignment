@@ -1,10 +1,10 @@
 ﻿@{
-    ViewBag.Title = "About";
+    ViewBag.Title = "Bot M is here Help";
 }
 <h2>@ViewBag.Title.</h2>
 <h3>@ViewBag.Message</h3>
 
-<p>Use this area to provide additional information.</p>
+<p>please ask monashine.</p>
 <div>
     <textarea readonly id="question_text" name="question_text" rows="10" cols="50"></textarea>
     <div>
@@ -19,11 +19,14 @@
         var question = document.getElementById("question").value;
         document.getElementById("question").value = "";
         var question_text = document.getElementById("question_text");
-        var student = "You need to register to create student content. And only administrators and students will be able to create stundet content."
-        var booking = "For booking, you need to click on the tag of \"booking\", Then enter your personal information, and select a time. You do not have to register to use this function. ";
+        var student = "You need to register to create student content. And only administrators and students will be able to create stundet content. And Administrators and tutors can view all students, when student can only view his own information"
+        var tutor = "You need to register to create tutor content. And only administrators and tutors will be able to create tutor content.";
+        var booking = "For booking, you need to click on the tag of \"booking\", Then select a date and enter your personal information, and select a time. You have to register to use this function. After success you will receive a confim email.";
+        var location = "You need to go to location page to see available locations information";
+        var email = "You can send bulk email with attachment in email page";
         var not_found = "Sorry, I don't understand. Please check your input."
         question_text.value += "me: \n   " + question + "\n";
-        question_text.value += "bot: \n   ";
+        question_text.value += "bot M: \n   ";
         var is_word = false;
         if (question.indexOf("booking") != -1) {
             question_text.value += booking + "\n";
@@ -31,6 +34,18 @@
         }
         if (question.indexOf("student") != -1) {
             question_text.value += student + "\n";
+            is_word = true;
+        }
+        if (question.indexOf("tutor") != -1) {
+            question_text.value += tutor + "\n";
+            is_word = true;
+        }
+        if (question.indexOf("location") != -1) {
+            question_text.value += location + "\n";
+            is_word = true;
+        }
+        if (question.indexOf("email") != -1) {
+            question_text.value += email + "\n";
             is_word = true;
         }
         if (!is_word) {

@@ -1,3 +1,4 @@
+// to show the loading page
 var page = location.href;
 if (page == "https://localhost:44331/")
 {
