@@ -1,0 +1,51 @@
+﻿@{
+    ViewBag.Title = "About";
+}
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+
+<p>Use this area to provide additional information.</p>
+<div>
+    <textarea readonly id="question_text" name="question_text" rows="10" cols="50"></textarea>
+    <div>
+        <input id="question" name="question" type="text" />
+        <button id="btn_sub" type="button">send</button>
+        <button id="btn_clr" type="button">clear</button>
+    </div>
+</div>
+<script>
+    var btn_sub = document.getElementById("btn_sub");
+    btn_sub.onclick = function () {
+        var question = document.getElementById("question").value;
+        document.getElementById("question").value = "";
+        var question_text = document.getElementById("question_text");
+        var student = "You need to register to create student content. And only administrators and students will be able to create stundet content."
+        var booking = "For booking, you need to click on the tag of \"booking\", Then enter your personal information, and select a time. You do not have to register to use this function. ";
+        var not_found = "Sorry, I don't understand. Please check your input."
+        question_text.value += "me: \n   " + question + "\n";
+        question_text.value += "bot: \n   ";
+        var is_word = false;
+        if (question.indexOf("booking") != -1) {
+            question_text.value += booking + "\n";
+            is_word = true;
+        }
+        if (question.indexOf("student") != -1) {
+            question_text.value += student + "\n";
+            is_word = true;
+        }
+        if (!is_word) {
+            question_text.value += not_found + "\n";
+        }
+    }
+
+    btn_clr.onclick = function () {
+        question_text = document.getElementById("question_text").value = "";
+    }
+</script>
+<style>
+    textarea {
+        width: 300px;
+        height: 500px;
+        resize: none;
+    }
+</style>

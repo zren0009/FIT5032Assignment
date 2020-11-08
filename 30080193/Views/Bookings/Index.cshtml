@@ -1,0 +1,107 @@
+﻿@model IEnumerable<_30080193.Models.Bookings>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+
+<div id="calendar"></div>
+<div style="display: none">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Locations.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BookingDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BookingTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bookinghours)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr class="booking">
+                <td class="location">
+                    @Html.DisplayFor(modelItem => item.Locations.Description)
+                </td>
+                <td class="location_id">
+                    @Html.DisplayFor(modelItem => item.Locations.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td class="time">
+                    @Html.DisplayFor(modelItem => item.BookingDate)
+                </td>
+                <td class="clock">
+                    @Html.DisplayFor(modelItem => item.BookingTime)
+                </td>
+                <td class="hours">
+                    @Html.DisplayFor(modelItem => item.Bookinghours)
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "Details", new { id = item.Id })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/fullcalendar")
+    <script> // to get location date start time and end time on calendar
+        // and pass them to another js files by localStorage
+        window.onload = function () {
+            var dt = [];
+            var start = [];
+            var end = [];
+            var loc = [];
+            $(".booking").each(function () {
+                var time = $(".time", this).text().trim();
+                var clock = $(".clock", this).text().trim();
+                var hour = $(".hours", this).text().trim();
+                var loca = $(".location_id", this).text().trim();
+                var clock_endhr = parseInt(clock.substring(0, 2)) + parseInt(hour);
+                var clock_end_time = clock_endhr + clock.substring(2, clock.length);
+                dt.push(time);
+                start.push(clock);
+                end.push(clock_end_time);
+                loc.push(loca);
+            });
+            localStorage.setItem("dt", dt);
+            localStorage.setItem("start", start);
+            localStorage.setItem("end", end);
+            localStorage.setItem("loc", loc);
+        }
+    </script>
+}
